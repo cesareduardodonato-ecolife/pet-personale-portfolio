@@ -1,12 +1,8 @@
-// =========================================================================
-// TRUQUE DE DNS (EVITA BLOQUEIO DE OPERADORAS/WI-FI AO MONGODB ATLAS)
-// =========================================================================
+
 const dns = require('dns');
 dns.setServers(['8.8.8.8', '8.8.4.4']);
 
-// =========================================================================
 // BIBLIOTECAS E CONFIGURAÇÕES GERAIS
-// =========================================================================
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
@@ -19,9 +15,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(__dirname));
 
-// =========================================================================
-// BANCO DE DADOS: AUTO-SEED (PREENCHIMENTO AUTOMÁTICO PARA O PORTFÓLIO)
-// =========================================================================
+// BANCO DE DADOS: AUTO-SEED PREENCHIMENTO AUTOMÁTICO 
 async function popularBancoAutomatico() {
     try {
         const db = mongoose.connection.db;
@@ -77,9 +71,7 @@ async function popularBancoAutomatico() {
     }
 }
 
-// =========================================================================
 // CONEXÃO COM MONGODB ATLAS
-// =========================================================================
 const uri = process.env.MONGODB_URI;
 
 if (!uri) {
@@ -96,10 +88,7 @@ mongoose.connect(uri)
         console.error("❌ Erro ao conectar ao MongoDB:", err);
     });
 
-// =========================================================================
 // ROTAS PRINCIPAIS DO SITE (API)
-// =========================================================================
-
 app.get('/dados-site', async (req, res) => {
     try {
         const db = mongoose.connection.db;
@@ -167,9 +156,7 @@ app.get('/admin/notificacoes', async (req, res) => {
     }
 });
 
-// =========================================================================
 // INICIALIZAÇÃO DO SERVIDOR
-// =========================================================================
 app.listen(PORT, () => {
     console.log("\n==================================================");
     console.log("🛡️  SISTEMA RODANDO EM MODO SANDBOX (PORTFÓLIO)");
