@@ -1,3 +1,12 @@
+// =========================================================================
+// TRUQUE DE DNS (EVITA BLOQUEIO DE OPERADORAS/WI-FI AO MONGODB ATLAS)
+// =========================================================================
+const dns = require('dns');
+dns.setServers(['8.8.8.8', '8.8.4.4']);
+
+// =========================================================================
+// BIBLIOTECAS E CONFIGURAÇÕES GERAIS
+// =========================================================================
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
@@ -6,10 +15,9 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Configurações gerais do servidor
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(__dirname)); // Fallback caso os arquivos do site estejam na pasta raiz
+app.use(express.static(__dirname));
 
 // =========================================================================
 // BANCO DE DADOS: AUTO-SEED (PREENCHIMENTO AUTOMÁTICO PARA O PORTFÓLIO)
@@ -20,7 +28,6 @@ async function popularBancoAutomatico() {
         
         console.log("⚙️ Verificando estrutura do banco de dados no MongoDB Atlas...");
         
-        // Estrutura EXATA exigida pelo código do front-end (scripts.js)
         const dadosIniciais = {
             servicos: {
                 "Banho Padrão": { 
@@ -60,7 +67,6 @@ async function popularBancoAutomatico() {
             ]
         };
 
-        // Substitui e injeta os dados na coleção 'dados' com a estrutura correta
         await db.collection('dados').deleteMany({});
         await db.collection('dados').insertOne(dadosIniciais);
 
@@ -84,7 +90,7 @@ if (!uri) {
 mongoose.connect(uri)
     .then(() => {
         console.log("✅ Conectado ao MongoDB Atlas com sucesso!");
-        popularBancoAutomatico(); // <-- Aciona o preenchimento automático assim que conecta
+        popularBancoAutomatico();
     })
     .catch((err) => {
         console.error("❌ Erro ao conectar ao MongoDB:", err);
@@ -94,7 +100,6 @@ mongoose.connect(uri)
 // ROTAS PRINCIPAIS DO SITE (API)
 // =========================================================================
 
-// Rota vital: envia os serviços e a galeria de fotos para o scripts.js montar a tela
 app.get('/dados-site', async (req, res) => {
     try {
         const db = mongoose.connection.db;
@@ -109,7 +114,6 @@ app.get('/dados-site', async (req, res) => {
     }
 });
 
-// Rota do mural de agendamentos (agenda)
 app.get('/agenda', async (req, res) => {
     try {
         const db = mongoose.connection.db;
@@ -123,7 +127,6 @@ app.get('/agenda', async (req, res) => {
     }
 });
 
-// Rota para simular agendamento de Ordem de Serviço
 app.post('/gerar-os', async (req, res) => {
     try {
         const db = mongoose.connection.db;
@@ -142,7 +145,6 @@ app.post('/gerar-os', async (req, res) => {
     }
 });
 
-// Rota de Login Simulado para o Painel da Luana (Admin)
 app.post('/admin/login', (req, res) => {
     const { senha } = req.body;
     if (senha === "demo123" || senha === process.env.ADMIN_PASSWORD) {
@@ -152,7 +154,6 @@ app.post('/admin/login', (req, res) => {
     }
 });
 
-// Rota para carregar notificações no Painel Admin
 app.get('/admin/notificacoes', async (req, res) => {
     try {
         const db = mongoose.connection.db;
