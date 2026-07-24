@@ -1,6 +1,5 @@
-// =========================================================================
-// BANCO DE DADOS DINÂMICO (PUXADO DO SERVIDOR) E CONFIG GERAIS
-// =========================================================================
+
+// BANCO DE DADOS DINÂMICO E CONFIG GERAIS
 let dbServicos = [];
 let dbFotos = [];
 let luanaToken = null;
@@ -17,7 +16,7 @@ async function carregarDadosSite() {
         const dados = await res.json();
         console.log("✅ Dados carregados com sucesso:", dados);
 
-        // 1. BLINDAGEM DA GALERIA DE FOTOS
+        // BLINDAGEM DA GALERIA DE FOTOS
         dbFotos = dados.galeria || [];
         const galeriaContainer = document.querySelector('.galeria-grid');
         if (galeriaContainer) {
@@ -28,7 +27,7 @@ async function carregarDadosSite() {
             }
         }
 
-        // 2. BLINDAGEM DOS SERVIÇOS (Evita o TypeError de leitura)
+        // BLINDAGEM DOS SERVIÇOS
         const servicosObj = dados.servicos || {};
         dbServicos = Object.keys(servicosObj).map(nome => ({
             id: nome,
@@ -297,9 +296,7 @@ function checarTosaEspecifica(prefixo) {
     if (inputEspecial) inputEspecial.style.display = temTosa ? "block" : "none";
 }
 
-// =========================================================================
 // AGENDA ÚNICA E PACOTES 
-// =========================================================================
 function atualizarValoresServicosOS() {
     const porte = document.getElementById(`os-porte`)?.value || 'P';
     const container = document.getElementById(`container-servicos-os`);
@@ -519,9 +516,7 @@ async function contratarPacote() {
     finally { if (btn) { btn.disabled = false; btn.innerText = "⭐ Confirmar Pacote"; } }
 }
 
-// =========================================================================
 // MURAL OCUPADO E PAINEL ADMIN
-// =========================================================================
 async function carregarMuralDoServidor() {
     const corpo = document.getElementById('corpo-tabela-mural');
     if (!corpo) return;
@@ -787,10 +782,7 @@ async function carregarNotificacoesAdmin() {
         }
     } catch { if (tabela) tabela.innerHTML = '<tr><td colspan="2">Erro de conexão.</td></tr>'; }
 }
-
-// =========================================================================
 // GERADOR DE PLACEHOLDERS ALEATÓRIOS (TUTOR, PET E RAÇA)
-// =========================================================================
 function atualizarPlaceholdersAleatorios() {
     const nomes = ["Camila", "Lucas", "Mariana", "Felipe", "Beatriz", "Gabriel", "Larissa", "Rafael", "Amanda", "Gustavo", "Fernanda", "Rodrigo", "Juliana", "Bruno", "Carolina", "Leonardo", "Patrícia", "Thiago"];
     const sobrenomes = ["Silva", "Santos", "Oliveira", "Souza", "Pereira", "Costa", "Carvalho", "Almeida", "Ferreira", "Ribeiro", "Gomes", "Martins", "Rocha", "Alves", "Monteiro", "Mendes", "Barros", "Freitas"];
