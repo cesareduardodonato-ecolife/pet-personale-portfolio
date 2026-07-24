@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Personalè - Estética Animal Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="watermark-logo">🐾 Pet Personalè</div>
+
+    <header>
+        <div class="logo">🐾 Pet Personalè</div>
+        <nav>
+            <ul>
+                <li><a onclick="mudarAba('aba-inicio')" class="nav-link ativo">Início</a></li>
+                <li><a onclick="mudarAba('aba-servicos')" class="nav-link">Serviços e Portes</a></li>
+                <li><a onclick="mudarAba('aba-fotos')" class="nav-link">Fotos dos PETs</a></li>
+                <li><a onclick="mudarAba('aba-mural')" class="nav-link">Mural de Horários</a></li>
+                <li><a onclick="mudarAba('aba-pacotes')" class="nav-link">Pacotes Mensais</a></li>
+                <li><a onclick="mudarAba('aba-os')" class="nav-link">Agende aqui</a></li>
+                <li><a onclick="mudarAba('aba-chat')" class="nav-link">Painel Especialista</a></li>
+                <li><a href="https://www.instagram.com/petpersonale?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                        target="_blank" class="nav-link insta-color">📷 Pet Personalè</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="aba-inicio" class="aba-conteudo aba-ativa">
+        <section class="hero">
+            <h1>O Cuidado Premium que seu Pet Merece</h1>
+            <p>Estética de alto padrão comandada pela Especialista Luana. Cuidado, técnica e muito amor.</p>
+            <button class="botao" onclick="mudarAba('aba-os')" style="margin-top:20px;">📅 Agendar meu Horário Agora</button>
+        </section>
+        <section class="secao-interna">
+            <h2>Nossa Localização Física</h2>
+            <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; align-items: center; text-align: left;">
+                <div style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); min-width: 300px;">
+                    <p><strong>📍 Endereço Comercial:</strong><br>Rua Jundiaí, 306 - Boqueirão<br>Praia Grande/SP</p>
+                    <p style="margin-top: 10px;"><strong>📞 WhatsApp:</strong><br><a href="https://wa.me/5513988640880" target="_blank" style="color:var(--cor-primaria); font-weight:bold;">(13) 98864-0880</a></p>
+                    <p style="margin-top: 10px;"><strong>📧 E-mail Oficial:</strong><br><a href="mailto:salaopetpersonale@gmail.com" style="color:var(--cor-primaria); font-weight:bold;">salaopetpersonale@gmail.com</a></p>
+                </div>
+                <div style="border-radius: 12px; overflow: hidden; border: 2px solid #eee;">
+                    <iframe src="https://maps.google.com/maps?q=Rua%20Jundia%C3%AD,%20306%20-%20Boqueir%C3%A3o,%20Praia%20Grande%20-%20SP&t=&z=15&ie=UTF8&iwloc=&output=embed" width="350" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <main id="aba-fotos" class="aba-conteudo">
+        <section class="secao-interna">
+            <h2>Galeria de Estrelas 🌟</h2>
+            <p>Confira alguns dos nossos clientes maravilhosos após o dia de beleza!</p>
+            <div class="galeria-grid">
+                <!-- Imagens injetadas via Javascript -->
+            </div>
+        </section>
+    </main>
+
+    <main id="aba-servicos" class="aba-conteudo">
+        <section class="secao-interna">
+            <h2>Catálogo de Serviços Premium</h2>
+            <div class="alerta-info">
+                <strong>🐶 Selecione o Porte do seu Cão para ver os preços (A partir de) e tempos:</strong><br>
+                <b>Pequeno (P):</b> Até 10 kg | <b>Médio (M):</b> 11 kg a 25 kg | <b>Grande (G):</b> Acima de 25 kg
+            </div>
+            <div class="seletor-porte-botoes">
+                <button class="btn-porte ativo" onclick="selecionarPorteExibicao('P')">Pequeno (P)</button>
+                <button class="btn-porte" onclick="selecionarPorteExibicao('M')">Médio (M)</button>
+                <button class="btn-porte" onclick="selecionarPorteExibicao('G')">Grande (G)</button>
+            </div>
+            <div id="grid-servicos-exibicao" class="cards-container"></div>
+        </section>
+    </main>
+
+    <main id="aba-mural" class="aba-conteudo">
+        <section class="secao-interna">
+            <h2>Mural de Horários Agendados</h2>
+            <div id="status-loja-banner" style="padding: 15px; margin-bottom: 20px; border-radius: 10px; font-weight: bold; font-size: 16px; display: none;"></div>
+            <div class="alerta-tolerancia">⏱️ <b>INFORMAÇÃO:</b> O limite tolerável para atrasos é de <b>15 minutos</b>. A agenda mostra o cruzamento de horários à prova de sobreposições.</div>
+            <div class="tabela-container">
+                <table class="tabela-mural">
+                    <thead><tr><th>Data e Horário (Ano 2026)</th><th>Paciente (PET) e Status</th></tr></thead>
+                    <tbody id="corpo-tabela-mural"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <main id="aba-pacotes" class="aba-conteudo">
+        <section class="secao-interna">
+            <h2>Contrate seu Pacote Mensal</h2>
+            <div id="pacote-sucesso-container" style="display:none; background:#d4edda; color:#155724; padding:20px; border-radius:10px; margin-bottom:20px;">
+                <h3>✅ Pacote Registrado com Sucesso!</h3>
+                <p>O comprovante foi enviado para seu e-mail e para a especialista.</p>
+                <div id="links-google-agenda-pacote" style="margin-top:15px; display:flex; flex-direction:column; gap:10px;"></div>
+                <button class="botao" style="margin-top:15px;" onclick="location.reload()">Fazer Novo Agendamento</button>
+            </div>
+
+            <div id="form-pacote" class="card-identificacao" style="max-width: 850px;">
+                <div class="alerta-info" style="font-size:12px;">
+                    <b>🕒 Regras de Horários:</b><br>
+                    - Segunda a Sábado: <b>09:00 às 18:00</b> (Serviços de Tosa restritos a partir das 17h).<br>
+                    - Domingos e Feriados: <b>09:00 às 16:00</b> (Sujeitos a aprovação da Luana. Tosas restritas a partir das 15h).<br>
+                    <i>⚠️ Todos os valores informados são "A partir de". Preencha todos os dados.</i>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px;">
+                    <div><label for="pct-tutor">Nome do Tutor (*):</label><input type="text" id="pct-tutor" placeholder="Ex: Camila Perez" onblur="validarCampoRigoroso(this)"></div>
+                    <div><label for="pct-pet">Nome do PET (*):</label><input type="text" id="pct-pet" placeholder="Ex: Mel" onblur="validarCampoRigoroso(this)"></div>
+                    <div><label for="pct-raca">Raça do PET (*):</label><input type="text" id="pct-raca" placeholder="Ex: Poodle" onblur="validarCampoRigoroso(this)"></div>
+
+                    <div><label for="pct-celular">Celular (DDD) (*):</label><input type="text" id="pct-celular" maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></div>
+                    <div><label for="pct-email">E-mail p/ Aviso/Agenda (*):</label><input type="email" id="pct-email" placeholder="cliente@email.com" onblur="validarEmail(this)"></div>
+                    <div>
+                        <label for="pct-porte">Porte do Animal (*):</label>
+                        <select id="pct-porte" onchange="atualizarInterfacePacotes()">
+                            <option value="">Selecione...</option>
+                            <option value="P">Pequeno (Até 10kg)</option>
+                            <option value="M">Médio (11kg a 25kg)</option>
+                            <option value="G">Grande (Acima de 25kg)</option>
+                        </select>
+                    </div>
+                    <div style="grid-column: span 3;"><label for="pct-obs">Observação de Saúde do Pet:</label><input type="text" id="pct-obs" placeholder="Doenças, cirurgias, agressividade, necessidade de apoio, etc. (Opcional)" onblur="validarCampoObs(this)"></div>
+                </div>
+
+                <h3 style="margin-top: 25px; border-bottom:1px solid #eee; padding-bottom:5px;">Qual pacote deseja?</h3>
+                <div class="radio-group">
+                    <label class="radio-box"><input type="radio" name="tipo-pacote" value="essencial" checked onchange="atualizarInterfacePacotes()"><b>Pacote Essencial</b> (4 Banhos + 1 Tosa Higiênica) - Sugerido 1x por semana.<br><span id="preco-essencial" style="color:var(--cor-primaria); font-weight:bold;">A partir de R$ 204,00</span></label>
+                    <label class="radio-box"><input type="radio" name="tipo-pacote" value="basico" onchange="atualizarInterfacePacotes()"><b>Pacote Básico</b> (3 Banhos + 1 Tosa Higiênica) - Sugerido a cada 10 dias.<br><span id="preco-basico" style="color:var(--cor-primaria); font-weight:bold;">A partir de R$ 154,00</span></label>
+                    <label class="radio-box"><input type="radio" name="tipo-pacote" value="personalizado" onchange="atualizarInterfacePacotes()"><b>Pacote Personalizado</b> - Escolha livremente os serviços desejados.</label>
+                </div>
+
+                <div id="bloco-servicos-personalizados" style="display:none;">
+                    <h3 style="margin-top: 20px;">Quais serviços incluir no pacote personalizado?</h3>
+                    <!-- GRADE INTELIGENTE DOS PACOTES -->
+                    <div id="container-servicos-pct" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; margin-top: 15px; background: #fdfdfd; padding: 15px; border-radius: 10px; border: 1px solid #eae7f2;"></div>
+                    <input type="text" id="pct-desc-tosa" placeholder="Qual o estilo ou nome da Tosa Específica desejada?" style="display:none; width: 100%; padding: 10px; border: 1px solid var(--cor-primaria); border-radius: 8px; margin-top: 10px; font-weight: bold;" onblur="validarCampoRigoroso(this)">
+                </div>
+
+                <div style="display: flex; gap: 15px; margin-top: 20px; background: #fdfdfd; padding:10px; border:1px solid #eee;">
+                    <label>🎀 Enfeite? <select id="pct-enfeite" style="width:auto;"><option value="Sim">Sim</option><option value="Não">Não</option></select></label>
+                    <label>🌸 Perfume? <select id="pct-perfume" style="width:auto;"><option value="Sim">Sim</option><option value="Não">Não</option></select></label>
+                </div>
+
+                <h3 style="margin-top: 25px;">Agende as Sessões (Limites de até 2 meses em 2026):</h3>
+                <p id="aviso-dias-pct" style="font-size:12px; color:var(--cor-primaria); font-weight:bold; margin-bottom:10px;"></p>
+
+                <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px solid #ddd;">
+                    <div style="display: flex; flex-wrap:wrap; gap: 10px; margin-bottom: 10px; align-items: center;">
+                        <select id="pct-add-data" class="seletor-horario seletor-datas" onchange="atualizarHorariosDisponiveis('pct-add-data', 'pct-add-hora', 'pct')"><option value="">Carregando datas...</option></select>
+                        <select id="pct-add-hora" class="seletor-horario" style="width:auto; margin-top:0;" onchange="verificarBloqueioTosa('pct')"><option value="">Data 1º</option></select>
+                        <button class="botao" style="padding: 10px 15px;" onclick="addDiaPacote()">+ Add Dia</button>
+                    </div>
+                    <ul id="lista-dias-pacote" style="list-style: none; font-size: 14px; padding-left: 0;"></ul>
+                </div>
+
+                <button class="botao" id="btn-contratar-pct" style="width: 100%; margin-top: 25px;" onclick="contratarPacote()">⭐ Confirmar Pacote</button>
+            </div>
+        </section>
+    </main>
+
+    <main id="aba-os" class="aba-conteudo">
+        <section class="secao-interna">
+            <h2>Agende seu Horário Único</h2>
+
+            <div id="os-sucesso-container" style="display:none; background:#d4edda; color:#155724; padding:20px; border-radius:10px; margin-bottom:20px;">
+                <h3>✅ Agendamento Registrado!</h3>
+                <p id="msg-status-os">Sua vaga está garantida no sistema.</p>
+                <div id="link-google-agenda-os" style="margin-top:15px;"></div>
+                <button class="botao" style="margin-top:15px;" onclick="location.reload()">Fazer Novo Agendamento</button>
+            </div>
+
+            <div id="form-os" class="card-identificacao" style="max-width: 850px;">
+                <div class="alerta-info" style="font-size:12px;">
+                    <b>🕒 Regras de Horários:</b><br>
+                    - Segunda a Sábado: <b>09:00 às 18:00</b><br>
+                    - Domingos e Feriados: <b>09:00 às 16:00</b><br>
+                    <i>⚠️ Todos os valores informados são "A partir de". Preencha todos os dados.</i>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px;">
+                    <div><label for="os-tutor">Nome do Tutor (*):</label><input type="text" id="os-tutor" placeholder="Ex: Felipe Silva" onblur="validarCampoRigoroso(this)"></div>
+                    <div><label for="os-pet">Nome do PET (*):</label><input type="text" id="os-pet" placeholder="Ex: Max" onblur="validarCampoRigoroso(this)"></div>
+                    <div><label for="os-raca">Raça do PET (*):</label><input type="text" id="os-raca" placeholder="Ex: Poodle" onblur="validarCampoRigoroso(this)"></div>
+
+                    <div><label for="os-celular">Celular (DDD) (*):</label><input type="text" id="os-celular" maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></div>
+                    <div><label for="os-email">E-mail p/ Aviso/Agenda (*):</label><input type="email" id="os-email" placeholder="cliente@email.com" onblur="validarEmail(this)"></div>
+                    <div>
+                        <label for="os-porte">Porte do Animal (*):</label>
+                        <select id="os-porte" onchange="atualizarValoresServicosOS()">
+                            <option value="">Selecione...</option>
+                            <option value="P">Pequeno (Até 10kg)</option>
+                            <option value="M">Médio (11kg a 25kg)</option>
+                            <option value="G">Grande (Acima de 25kg)</option>
+                        </select>
+                    </div>
+
+                    <div style="grid-column: span 3;"><label for="os-obs">Observação de Saúde do Pet:</label><input type="text" id="os-obs" placeholder="Doenças, agressividade, necessidade de apoio, etc. (Opcional)" onblur="validarCampoObs(this)"></div>
+                    <div style="grid-column: span 2;">
+                        <label for="os-data">Data (Limite de 1 mês):</label>
+                        <select id="os-data" class="seletor-horario seletor-datas-curto" onchange="verificarDiaSemana(); atualizarHorariosDisponiveis('os-data', 'os-hora', 'os')"><option value="">Carregando datas...</option></select>
+                        <span id="label-dia-semana" style="font-size: 12px; color: var(--cor-primaria); font-weight: bold; display: block; margin-top: 4px;"></span>
+                    </div>
+                    <div><label for="os-hora">Horário de Chegada:</label><select id="os-hora" class="seletor-horario" onchange="verificarBloqueioTosa('os')"><option value="">Escolha uma data 1º</option></select></div>
+                </div>
+
+                <h3 style="margin-top: 25px; border-bottom:1px solid #eee; padding-bottom:5px;">Selecione os Serviços</h3>
+                <!-- GRADE INTELIGENTE DO AGENDAMENTO ÚNICO -->
+                <div id="container-servicos-os" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; margin-top: 15px; background: #fdfdfd; padding: 15px; border-radius: 10px; border: 1px solid #eae7f2;"></div>
+
+                <input type="text" id="os-desc-tosa" placeholder="Qual o estilo ou nome da Tosa Específica desejada?" style="display:none; width: 100%; padding: 10px; border: 1px solid var(--cor-primaria); border-radius: 8px; margin-top: 10px; font-weight: bold;" onblur="validarCampoRigoroso(this)">
+
+                <div style="display: flex; gap: 15px; margin-top: 15px; background: #fdfdfd; padding:10px; border:1px solid #eee;">
+                    <label>🎀 Enfeite? <select id="os-enfeite" style="width:auto;"><option value="Sim">Sim</option><option value="Não">Não</option></select></label>
+                    <label>🌸 Perfume? <select id="os-perfume" style="width:auto;"><option value="Sim">Sim</option><option value="Não">Não</option></select></label>
+                </div>
+
+                <div style="background: #eef5fc; padding: 15px; margin-top: 20px; border-radius:8px; font-weight: bold; display: flex; gap: 20px; color: var(--cor-primaria)">
+                    <label>Estimativa Mínima de Tempo: <input type="text" id="os-tempo-total" value="0h 0min" readonly class="input-travado" style="width: 100px;"></label>
+                    <label>Valor Calculado A Partir de: R$ <input type="number" id="os-valor-total" value="0" readonly class="input-travado"></label>
+                </div>
+
+                <button class="botao" id="btn-gerar-os" style="width: 100%; margin-top: 20px;" onclick="gerarOrdemServico()">🧾 Confirmar e Agendar</button>
+            </div>
+        </section>
+    </main>
+
+    <main id="aba-chat" class="aba-conteudo">
+        <section class="secao-interna">
+            <h2>Painel Especialista (Luana)</h2>
+            <div id="login-admin-retirada" class="card-identificacao" style="max-width: 450px;">
+                <h3>🔐 Acesso Restrito</h3>
+                <input type="password" id="senha-luana" placeholder="Digite sua senha">
+                <button class="botao" style="width:100%; margin-top:15px;" onclick="autenticarLuana()">Acessar Painel</button>
+                <button class="botao botao-secundario" style="width:100%; margin-top:10px; background:#fff3cd; color:#856404; border: 1px solid #ffeeba;" onclick="esqueciMinhaSenha()">🔑 Esqueci minha senha</button>
+            </div>
+
+            <div id="painel-luana-ativo" style="display:none; text-align: left;" class="card-identificacao">
+                <div style="background: #fdfdfd; border:1px solid #ccc; padding:15px; border-radius:8px; margin-bottom: 25px;">
+                    <h3 style="color:var(--cor-texto); margin-bottom: 10px;">⚙️ Controle Imediato da Loja</h3>
+                    <p style="font-size:12px; margin-bottom: 10px; color:#666;">Fechar a loja criará alertas para você remarcar os pets agendados de hoje em diante.</p>
+                    <button id="btn-toggle-loja" class="botao" style="background:#dc3545;" onclick="toggleStatusLoja()">🔴 Fechar Estabelecimento Imediatamente</button>
+                </div>
+
+                <div style="background: #fff3cd; border:1px solid #ffeeba; padding:15px; border-radius:8px; margin-bottom: 25px;">
+                    <h3 style="color:#856404; margin-bottom: 10px;">⚠️ Aprovações e Remarcações Pendentes</h3>
+                    <div id="lista-pendentes-admin" style="font-size:13px; color:#555;">Nenhuma ação pendente.</div>
+                </div>
+
+                <h3 style="color:var(--cor-primaria);">📋 Controle em Tempo Real de Pets na Loja</h3>
+                <button class="botao botao-secundario" style="margin-bottom: 15px; font-size:12px;" onclick="carregarNotificacoesAdmin()">🔄 Atualizar Agenda</button>
+                <button class="botao" style="background:#6c757d; margin-bottom: 15px; font-size:12px;" onclick="baixarRelatorio()">📥 Gerar PDF de Fechamento (Exige Senha)</button>
+
+                <div style="background: #eef5fc; border:1px solid #cce0f5; padding:15px; border-radius:8px; margin-bottom: 25px; margin-top: 25px;">
+                    <h3 style="color:var(--cor-primaria); margin-bottom: 10px;">🌐 Gestão Inteligente do Site</h3>
+                    <p style="font-size:12px; margin-bottom: 10px; color:#666;">Altere sua senha definitiva, modifique os preços dos serviços e atualize as fotos da galeria em tempo real.</p>
+                    <button class="botao" style="background:#17a2b8;" onclick="abrirModalGestao()">✏️ Abrir Editor do Site</button>
+                </div>
+
+                <div class="tabela-container">
+                    <table class="tabela-mural">
+                        <thead><tr><th>Ficha do Pet (Status)</th><th>Ação do Sistema</th></tr></thead>
+                        <tbody id="lista-notificacoes-admin"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal Escondido para a Luana Remarcar Agendamentos Manuais -->
+    <div id="modal-remarcar" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:white; padding:30px; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,0.5); z-index:9999; width: 90%; max-width: 400px; text-align: left;">
+        <h3 style="color:var(--cor-primaria); margin-bottom: 15px;">🔄 Escolher Novo Horário</h3>
+        <input type="hidden" id="remarcar-id">
+        <label for="remarcar-data" style="font-weight:bold; font-size:13px;">Nova Data:</label>
+        <select id="remarcar-data" class="seletor-horario seletor-datas" onchange="atualizarHorariosDisponiveis('remarcar-data', 'remarcar-hora', 'rm')"></select>
+        
+        <label for="remarcar-hora" style="font-weight:bold; font-size:13px; margin-top:10px; display:block;">Novo Horário (HH:MM):</label>
+        <select id="remarcar-hora" class="seletor-horario"><option value="">Data 1º</option></select>
+        
+        <button class="botao" style="width:100%; background:#28a745; margin-bottom:10px; margin-top:15px;" onclick="confirmarRemarcacao()">Confirmar Remarcação</button>
+        <button class="botao botao-secundario" style="width:100%;" onclick="document.getElementById('modal-remarcar').style.display='none'">Cancelar</button>
+    </div>
+
+    <!-- Modal Gestão do Site (Para a Luana) -->
+    <div id="modal-gestao" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:white; padding:30px; border-radius:12px; box-shadow:0 10px 40px rgba(0,0,0,0.6); z-index:9999; width: 95%; max-width: 600px; max-height: 85vh; overflow-y: auto; text-align: left;">
+        <h3 style="color:var(--cor-primaria); border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px;">🛠️ Editor do Sistema</h3>
+
+        <h4 style="margin-bottom:5px;">1. Trocar Senha Mestra</h4>
+        <input type="password" id="gestao-nova-senha" placeholder="Digite uma nova senha (ou deixe em branco para manter)" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; margin-bottom: 15px;">
+
+        <h4 style="margin-bottom:5px;">2. Galeria de Fotos (Links separados por vírgula)</h4>
+        <textarea id="gestao-fotos" rows="3" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; margin-bottom: 15px; font-size:12px;"></textarea>
+
+        <h4 style="margin-bottom:5px;">3. Tabela de Preços (A Partir de R$)</h4>
+        <div id="lista-gestao-servicos" style="margin-bottom: 20px;"></div>
+
+        <button class="botao" style="width:100%; background:#28a745; margin-bottom:10px;" onclick="salvarGestaoSite()">💾 Salvar e Atualizar Site</button>
+        <button class="botao botao-secundario" style="width:100%;" onclick="document.getElementById('modal-gestao').style.display='none'">Cancelar</button>
+    </div>
+
+<!-- MODAIS DO SISTEMA (Já existentes no seu código) -->
+    <!-- ... seus modais aqui ... -->
+
+    <!-- =================================================== -->
+    <!-- RODAPÉ DO SISTEMA (FOOTER) -->
+    <!-- =================================================== -->
+
+    <footer class="rodape-sistema">
+        <div class="rodape-conteudo">
+            <div class="rodape-coluna">
+                <span class="rodape-logo">🐾 Pet Personalè</span>
+                <p>Estética Animal Premium • Cuidado e técnica de alto padrão.</p>
+                <!-- DADO ADICIONADO: CNPJ e Horário -->
+                <p style="font-size: 11px; color: #888; margin-top: 6px;">
+                    CNPJ: 00.000.000/0001-00<br>
+                    Seg. a Sáb. das 09:00 às 18:00
+                </p>
+            </div>
+            
+            <div class="rodape-coluna rodape-centro">
+                <p>&copy; 2026 Pet Personalè. Todos os direitos reservados.</p>
+                <p style="font-size: 11px; color: #28a745; font-weight: 600; margin-top: 3px;">
+                    🔒 Sistema 100% Seguro e Automatizado
+                </p>
+                <!-- DADO ADICIONADO: Link no seu nome e valorização da automação -->
+                <p class="dev-credito">
+                    Engenharia e Automação por <a href="https://wa.me/5513981359929?text=Olá+Cesar,+vi+o+sistema+do+Pet+Personale+e+gostaria+de+um+orçamento" target="_blank" style="color: var(--cor-primaria); font-weight: bold; text-decoration: none;">Cesar Donato</a>
+                </p>
+            </div>
+
+            <div class="rodape-coluna rodape-links">
+                <a href="https://wa.me/5513988640880" target="_blank" title="WhatsApp Oficial">💬 WhatsApp</a>
+                <a href="https://www.instagram.com/petpersonale?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" title="Instagram Oficial">📷 Instagram</a>
+                <a onclick="mudarAba('aba-inicio')" style="cursor: pointer;">⬆️ Voltar ao Topo</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
