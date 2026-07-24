@@ -5,7 +5,7 @@ Um sistema Full Stack desenvolvido para automatizar o fluxo de atendimento de um
 ## 🚀 Demonstração ao Vivo (Modo Sandbox)
 > **Aviso de Privacidade / LGPD:** Para proteger os dados das clientes reais, o link de demonstração abaixo opera em **Modo Sandbox**. As mensagens de WhatsApp são simuladas no servidor e os e-mails são redirecionados para um ambiente controlado.
 
-* **🔗 Acessar o Site Demonstrativo:** https://petpersonale.onrender.com
+* **🔗 Acessar o Site Demonstrativo:** https://pet-personale-portfolio.onrender.com/
 * **🔐 Acesso ao Painel da Especialista (Área de Testes):**
   * **Senha de Demonstração:** `demo123`
 ---
