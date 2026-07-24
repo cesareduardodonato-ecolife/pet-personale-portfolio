@@ -1,18 +1,14 @@
 # 🐾 Pet Personalè — Sistema de Gestão e Agendamento Inteligente
 
 Um sistema Full Stack desenvolvido para automatizar o fluxo de atendimento de um centro de estética animal, integrando agendamento online com validação de conflitos, geração automática de Ordens de Serviço em PDF, notificações instantâneas via WhatsApp e painel administrativo protegido.
-
 ---
-
 ## 🚀 Demonstração ao Vivo (Modo Sandbox)
 > **Aviso de Privacidade / LGPD:** Para proteger os dados das clientes reais, o link de demonstração abaixo opera em **Modo Sandbox**. As mensagens de WhatsApp são simuladas no servidor e os e-mails são redirecionados para um ambiente controlado.
 
-* **🔗 Acessar o Site Demonstrativo:** *(Coloque aqui o link do site quando hospedarmos, ex: https://petpersonale.onrender.com
+* **🔗 Acessar o Site Demonstrativo:** https://petpersonale.onrender.com
 * **🔐 Acesso ao Painel da Especialista (Área de Testes):**
   * **Senha de Demonstração:** `demo123`
-
 ---
-
 ## 🛠️ Tecnologias Utilizadas
 * **Backend:** Node.js, Express.js
 * **Banco de Dados:** MongoDB Atlas (Mongoose ODM)
