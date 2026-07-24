@@ -107,6 +107,43 @@ app.use(express.json());
 
 process.on('uncaughtException', function (err) { console.error("Erro fatal capturado:", err); });
 
+// Exemplo de como integrar o auto-seed no seu server.js atual:
+// (Cole esta lógica logo após a confirmação de sucesso da conexão com o banco)
+
+async function popularBancoAutomatico() {
+    try {
+        const db = mongoose.connection.db;
+        const servicosCount = await db.collection('servicos').countDocuments();
+
+        // Se o banco estiver vazio, ele injeta os dados fictícios do portfólio sozinho!
+        if (servicosCount === 0) {
+            console.log("⚙️ Banco de demonstração vazio detectado. Populando dados iniciais...");
+            
+            await db.collection('servicos').insertMany([
+                { nome: "Banho & Tosa Relaxante", icone: "🛁", desc: "Banho com produtos hipoalergênicos e tosa na tesoura.", P: { v: 50, t: 40 }, M: { v: 60, t: 60 }, G: { v: 90, t: 90 } },
+                { nome: "Spa Pet Personale", icone: "🫧", desc: "Massagem relaxante e ofurô para desestressar.", P: { v: 70, t: 60 }, M: { v: 90, t: 80 }, G: { v: 120, t: 100 } },
+                { nome: "Tosa Higiênica", icone: "✂️", desc: "Limpeza das patinhas e região íntima.", P: { v: 30, t: 30 }, M: { v: 40, t: 45 }, G: { v: 50, t: 30 } }
+            ]);
+
+            await db.collection('galeria').insertMany([
+                { url: "https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=500" },
+                { url: "https://images.unsplash.com/photo-1517849845537-4d257902454a?w=500" },
+                { url: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=500" }
+            ]);
+
+            console.log("✨ Banco de demonstração populado automaticamente com sucesso!");
+        }
+    } catch (e) {
+        console.log("Erro no auto-seed:", e);
+    }
+}
+
+// Chame essa função logo após o seu mongoose.connect():
+// mongoose.connect(process.env.MONGODB_URI).then(() => {
+//     console.log("✅ Conectado ao MongoDB Atlas com sucesso!");
+//     popularBancoAutomatico();
+// });
+
 async function getControleLoja() {
     let ctrl = await ControleLoja.findOne();
     if (!ctrl) ctrl = await ControleLoja.create({ abertaAgora: true, diasEspeciaisAprovados: {} });
@@ -125,7 +162,7 @@ async function getConfigAdmin() {
         cfg = await ConfigAdmin.create({ 
             senha: process.env.SENHA_ADMIN_INICIAL || "1234", 
             telefoneRecuperacao: process.env.TELEFONE_RECUPERACAO || "11999999999",
-            emailRecuperacao: process.env.EMAIL_LOJA || "salaopetpersonale@gmail.com" 
+            emailRecuperacao: process.env.EMAIL_LOJA || "corretordeimoveisimediato@gmail.com" 
         });
     }
     return cfg;

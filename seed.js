@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { MongoClient } = require('mongodb');
+const mongoose = require('mongoose');
 
 // Dados fictícios para o seu Portfólio demonstrativo
 const dadosIniciais = {
@@ -29,18 +29,16 @@ async function popularBanco() {
         process.exit(1);
     }
 
-    const client = new MongoClient(uri);
-
     try {
-        console.log("⏳ Conectando ao MongoDB Atlas...");
-        await client.connect();
+        console.log("⏳ Conectando ao MongoDB Atlas via Mongoose...");
+        await mongoose.connect(uri);
         console.log("✅ Conectado com sucesso ao banco de demonstração!");
 
-        const db = client.db(); // Puxa automaticamente o banco da sua URI (pet_personale_demo)
+        const db = mongoose.connection.db;
 
         // 1. Inserindo na coleção 'servicos'
         console.log("Injetando serviços fictícios...");
-        await db.collection('servicos').deleteMany({}); // Limpa testes antigos
+        await db.collection('servicos').deleteMany({});
         await db.collection('servicos').insertMany(dadosIniciais.servicos);
 
         // 2. Inserindo na coleção 'depoimentos'
@@ -53,15 +51,15 @@ async function popularBanco() {
         await db.collection('galeria').deleteMany({});
         await db.collection('galeria').insertMany(dadosIniciais.galeria);
 
-        // 4. Se o seu servidor puxa tudo de uma coleção única chamada 'dados' ou 'site'
+        // 4. Inserindo na coleção principal 'dados'
         await db.collection('dados').deleteMany({});
         await db.collection('dados').insertOne(dadosIniciais);
 
-        console.log("🚀 SUCESSO ABSOLUTO! O banco foi populado em menos de 5 segundos!");
+        console.log("🚀 SUCESSO ABSOLUTO! O banco foi populado com sucesso!");
     } catch (erro) {
         console.error("❌ Erro durante o preenchimento:", erro);
     } finally {
-        await client.close();
+        await mongoose.disconnect();
         console.log("🔒 Conexão encerrada.");
     }
 }
